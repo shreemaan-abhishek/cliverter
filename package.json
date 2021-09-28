@@ -1,0 +1,19 @@
+{
+  "name": "cliverter",
+  "version": "0.1.0",
+  "description": "Converter tool at the comfort of your command line.",
+  "main": "./bin/cliverter",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreemaan-abhishek/cliverter.git"
+  },
+  "author": "shreemaan-abhishek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shreemaan-abhishek/cliverter/issues"
+  },
+  "homepage": "https://github.com/shreemaan-abhishek/cliverter#readme"
+}
