@@ -4,7 +4,8 @@
   "description": "Converter tool at the comfort of your command line.",
   "main": "./bin/cliverter",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/shreemaan-abhishek/cliverter/issues"
   },
-  "homepage": "https://github.com/shreemaan-abhishek/cliverter#readme"
+  "homepage": "https://github.com/shreemaan-abhishek/cliverter#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/config-conventional": "^13.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.4.1"
+  }
 }
