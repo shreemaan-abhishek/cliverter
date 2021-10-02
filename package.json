@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Converter tool at the comfort of your command line.",
   "main": "./bin/cliverter",
+  "bin": {
+    "cliverter": "./bin/cliverter"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
