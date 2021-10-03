@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const figlet = require('figlet');
 
 const args: string[] = process.argv; // Command line arguments
