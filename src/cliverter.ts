@@ -22,4 +22,6 @@ const printHelpMessage = () => {
 
 if(inputArgs.length == 0){
   printHelpMessage()
+} else if (inputArgs.length > 1) {
+  console.log(`Error: Received ${inputArgs.length} arguments but expected 1`)
 }
