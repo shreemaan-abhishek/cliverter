@@ -36,5 +36,8 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "figlet": "^1.5.2"
   }
 }
