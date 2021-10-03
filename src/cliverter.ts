@@ -1,3 +1,5 @@
+import { CommandFactory } from "./CommandFactory";
+
 const figlet = require('figlet');
 
 const args: string[] = process.argv; // Command line arguments
@@ -22,4 +24,8 @@ if(inputArgs.length == 0){
   printHelpMessage()
 } else if (inputArgs.length > 1) {
   console.log(`Error: Received ${inputArgs.length} arguments but expected 1`)
+} else {
+  const factoryObject = new CommandFactory();
+  const commandObject = factoryObject.getCommand(inputArgs[0]);
+  commandObject.run();
 }
