@@ -8,13 +8,7 @@ export class HelpCommand implements Command {
       font: 'Standard',
       horizontalLayout: 'full',
     });
-    const helpText = `${cliverterFiglet}
-  
-      Cliverter is a converter app in a command-line.
-  
-      usage:
-        cliverter <command>
-    `
+    const helpText = `${cliverterFiglet}\n\nCliverter is a converter app in a command-line.\nusage: cliverter <command>`
     console.log(helpText)
   }
 }
