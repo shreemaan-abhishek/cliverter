@@ -1,12 +1,9 @@
-import { CommandFactory } from "./CommandFactory";
 import { errorMessage, helpMessage } from "./commands/general";
 
 const figlet = require('figlet');
 
 const args: string[] = process.argv; // Command line arguments
 const inputArgs: string[] = args.slice(2); // Remove first two arguments
-
-const factoryObject = new CommandFactory();
 
 if(inputArgs.length == 0){
   helpMessage()
