@@ -1,4 +1,5 @@
 import { CommandFactory } from "./CommandFactory";
+import { errorMessage, helpMessage } from "./commands/general";
 
 const figlet = require('figlet');
 
@@ -8,11 +9,14 @@ const inputArgs: string[] = args.slice(2); // Remove first two arguments
 const factoryObject = new CommandFactory();
 
 if(inputArgs.length == 0){
-  const commandObject = factoryObject.getCommand("--help");
-  commandObject.run();
+  helpMessage()
 } else if (inputArgs.length > 1) {
   console.log(`Error: Received ${inputArgs.length} arguments but expected 1`)
 } else {
-  const commandObject = factoryObject.getCommand(inputArgs[0]);
-  commandObject.run();
+  switch(inputArgs[0]) {
+    case "--help":
+     helpMessage();
+    default:
+     errorMessage();
+   }
 }
