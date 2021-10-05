@@ -1,5 +1,20 @@
 import figlet from 'figlet';
 
+import { inchToCm } from './converters/length';
+
+class Command {
+	name: string;
+	description: string;
+	constructor(name: string, description: string) {
+		this.name = name;
+		this.description = description;
+	}
+}
+
+const supportedCommands: Command[] = [
+	new Command('inch-cm', 'Convert inch to centimeters'),
+];
+
 const helpMessage = () => {
 	const cliverterFiglet = figlet.textSync('Cliverter', {
 		font: 'Standard',
@@ -24,6 +39,9 @@ if (inputArgs.length === 0) {
 	switch (inputArgs[0]) {
 		case '--help':
 			helpMessage();
+			break;
+		case 'inch-cm':
+			inchToCm(inputArgs[1]);
 			break;
 		default:
 			errorMessage();
