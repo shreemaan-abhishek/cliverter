@@ -1,4 +1,17 @@
-import { errorMessage, helpMessage } from './commands/general';
+import figlet from 'figlet';
+
+const helpMessage = () => {
+	const cliverterFiglet = figlet.textSync('Cliverter', {
+		font: 'Standard',
+		horizontalLayout: 'full',
+	});
+	const helpText = `${cliverterFiglet}\n\nCliverter is a converter app in a command-line.\nusage: cliverter <command>`;
+	console.log(helpText);
+};
+
+const errorMessage = () => {
+	console.log(`Unrecognized command. See 'cliverter --help'`);
+};
 
 const args: string[] = process.argv; // Command line arguments
 const inputArgs: string[] = args.slice(2); // Remove first two arguments
