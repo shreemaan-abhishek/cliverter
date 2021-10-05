@@ -5,7 +5,7 @@ const inputArgs: string[] = args.slice(2); // Remove first two arguments
 
 if (inputArgs.length === 0) {
 	helpMessage();
-} else if (inputArgs.length > 1) {
+} else if (inputArgs.length > 2) {
 	console.log(`Error: Received ${inputArgs.length} arguments but expected 1`);
 } else {
 	switch (inputArgs[0]) {
