@@ -36,14 +36,34 @@ if (inputArgs.length === 0) {
 } else if (inputArgs.length > 2) {
 	console.log(`Error: Received ${inputArgs.length} arguments but expected 1`);
 } else {
-	switch (inputArgs[0]) {
-		case '--help':
-			helpMessage();
-			break;
-		case 'inch-cm':
-			inchToCm(inputArgs[1]);
-			break;
-		default:
-			errorMessage();
+	// check if user forgot to mention the input for conversion
+	if (
+		inputArgs[1] === undefined &&
+		inputArgs[0] !== '--help' &&
+		isValidCommand(inputArgs[0])
+	) {
+		console.log('Nothing specified, nothing converted.');
+	} else {
+		switch (inputArgs[0]) {
+			case '--help':
+				helpMessage();
+				break;
+			case 'inch-cm':
+				inchToCm(inputArgs[1]);
+				break;
+			default:
+				errorMessage();
+		}
 	}
+}
+
+function isValidCommand(command: string) {
+	let isValid = false;
+	supportedCommands.forEach((supportedCommand) => {
+		if (supportedCommand.name === command) {
+			isValid = true;
+			return;
+		}
+	});
+	return isValid;
 }
