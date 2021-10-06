@@ -1,6 +1,6 @@
 import figlet from 'figlet';
 
-import { inchToCm } from './converters/length';
+import { cmToInch, inchToCm } from './converters/length';
 
 class Command {
 	name: string;
@@ -13,6 +13,7 @@ class Command {
 
 const supportedCommands: Command[] = [
 	new Command('inch-cm', 'Convert inch to centimeters'),
+	new Command('cm-inch', 'Convert centimeters to inch'),
 ];
 
 const helpMessage = () => {
@@ -50,6 +51,9 @@ if (inputArgs.length === 0) {
 				break;
 			case 'inch-cm':
 				inchToCm(inputArgs[1]);
+				break;
+			case 'cm-inch':
+				cmToInch(inputArgs[1]);
 				break;
 			default:
 				errorMessage();
