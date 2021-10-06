@@ -1,5 +1,6 @@
 import figlet from 'figlet';
 
+import { hectareToMeterSq, meterSqToHectare } from './converters/area';
 import {
 	cmToInch,
 	inchToCm,
@@ -25,6 +26,8 @@ const supportedCommands: Command[] = [
 	new Command('meter-mile', 'Convert meters to miles'),
 	new Command('yard-meter', 'Convert yards to meters'),
 	new Command('meter-yard', 'Convert meters to yards'),
+	new Command('hectare-metersq', 'Convert hectares to meter square'),
+	new Command('metersq-hectare', 'Convert meter square to hectares'),
 ];
 
 const helpMessage = () => {
@@ -77,6 +80,12 @@ if (inputArgs.length === 0) {
 				break;
 			case 'meter-yard':
 				meterToYard(inputArgs[1]);
+				break;
+			case 'metersq-hectare':
+				meterSqToHectare(inputArgs[1]);
+				break;
+			case 'hectare-metersq':
+				hectareToMeterSq(inputArgs[1]);
 				break;
 			default:
 				errorMessage();
