@@ -5,6 +5,8 @@ import {
 	hectareToAcre,
 	hectareToMeterSq,
 	meterSqToHectare,
+	meterSqToSqFeet,
+	sqFeetToMeterSq,
 } from './converters/area';
 import {
 	cmToInch,
@@ -35,6 +37,8 @@ const supportedCommands: Command[] = [
 	new Command('metersq-hectare', 'Convert meter square to hectares'),
 	new Command('hectare-acre', 'Convert hectares to acres'),
 	new Command('acre-hectare', 'Convert acres to hectares'),
+	new Command('sqft-metersq', 'Convert square feet to meter square'),
+	new Command('metersq-sqft', 'Convert meter square to square feet'),
 ];
 
 const helpMessage = () => {
@@ -99,6 +103,12 @@ if (inputArgs.length === 0) {
 				break;
 			case 'acre-hectare':
 				acreToHectare(inputArgs[1]);
+				break;
+			case 'sqft-metersq':
+				sqFeetToMeterSq(inputArgs[1]);
+				break;
+			case 'metersq-sqft':
+				meterSqToSqFeet(inputArgs[1]);
 				break;
 			default:
 				errorMessage();
