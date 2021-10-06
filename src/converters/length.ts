@@ -14,3 +14,11 @@ export const mileToMeter = (value: string) => {
 export const meterToMile = (value: string) => {
 	console.log(Number(value) / 1609.344);
 };
+
+export const yardToMeter = (value: string) => {
+	console.log(Number(0.9144 * Number(value)));
+};
+
+export const meterToYard = (value: string) => {
+	console.log(Number(value) / 0.9144);
+};

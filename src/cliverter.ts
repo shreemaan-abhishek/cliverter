@@ -4,7 +4,9 @@ import {
 	cmToInch,
 	inchToCm,
 	meterToMile,
+	meterToYard,
 	mileToMeter,
+	yardToMeter,
 } from './converters/length';
 
 class Command {
@@ -21,6 +23,8 @@ const supportedCommands: Command[] = [
 	new Command('cm-inch', 'Convert centimeters to inch'),
 	new Command('mile-meter', 'Convert miles to meters'),
 	new Command('meter-mile', 'Convert meters to miles'),
+	new Command('yard-meter', 'Convert yards to meters'),
+	new Command('meter-yard', 'Convert meters to yards'),
 ];
 
 const helpMessage = () => {
@@ -67,6 +71,12 @@ if (inputArgs.length === 0) {
 				break;
 			case 'meter-mile':
 				meterToMile(inputArgs[1]);
+				break;
+			case 'yard-meter':
+				yardToMeter(inputArgs[1]);
+				break;
+			case 'meter-yard':
+				meterToYard(inputArgs[1]);
 				break;
 			default:
 				errorMessage();
