@@ -6,3 +6,11 @@ export const hectareToMeterSq = (value: string) => {
 export const meterSqToHectare = (value: string) => {
 	console.log(Number(Number(value) / 10000));
 };
+
+export const hectareToAcre = (value: string) => {
+	console.log(Number(2.47105 * Number(value)));
+};
+
+export const acreToHectare = (value: string) => {
+	console.log(Number(Number(value) / 2.47105));
+};
