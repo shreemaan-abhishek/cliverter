@@ -1,6 +1,11 @@
 import figlet from 'figlet';
 
-import { cmToInch, inchToCm } from './converters/length';
+import {
+	cmToInch,
+	inchToCm,
+	meterToMile,
+	mileToMeter,
+} from './converters/length';
 
 class Command {
 	name: string;
@@ -14,6 +19,8 @@ class Command {
 const supportedCommands: Command[] = [
 	new Command('inch-cm', 'Convert inch to centimeters'),
 	new Command('cm-inch', 'Convert centimeters to inch'),
+	new Command('mile-meter', 'Convert miles to meters'),
+	new Command('meter-mile', 'Convert meters to miles'),
 ];
 
 const helpMessage = () => {
@@ -54,6 +61,12 @@ if (inputArgs.length === 0) {
 				break;
 			case 'cm-inch':
 				cmToInch(inputArgs[1]);
+				break;
+			case 'mile-meter':
+				mileToMeter(inputArgs[1]);
+				break;
+			case 'meter-mile':
+				meterToMile(inputArgs[1]);
 				break;
 			default:
 				errorMessage();
