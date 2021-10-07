@@ -16,6 +16,7 @@ import {
 	mileToMeter,
 	yardToMeter,
 } from './converters/length';
+import { cToF, cToK, fToC, fToK, kToC, kToF } from './converters/temperature';
 
 class Command {
 	name: string;
@@ -39,6 +40,12 @@ const supportedCommands: Command[] = [
 	new Command('acre-hectare', 'Convert acres to hectares'),
 	new Command('sqft-metersq', 'Convert square feet to meter square'),
 	new Command('metersq-sqft', 'Convert meter square to square feet'),
+	new Command('degf-degc', 'Convert fahrenheit to celcius'),
+	new Command('degc-degf', 'Convert celcius to fahrenheit'),
+	new Command('degc-kelvin', 'Convert celcius to kelvin'),
+	new Command('kelvin-degc', 'Convert kelvin to celcius'),
+	new Command('degf-kelvin', 'Convert fahrenheit to kelvin'),
+	new Command('kelvin-degf', 'Convert kelvin to fahrenheit'),
 ];
 
 const helpMessage = () => {
@@ -109,6 +116,24 @@ if (inputArgs.length === 0) {
 				break;
 			case 'metersq-sqft':
 				meterSqToSqFeet(inputArgs[1]);
+				break;
+			case 'degf-degc':
+				fToC(inputArgs[1]);
+				break;
+			case 'degc-degf':
+				cToF(inputArgs[1]);
+				break;
+			case 'degc-kelvin':
+				cToK(inputArgs[1]);
+				break;
+			case 'kelvin-degc':
+				kToC(inputArgs[1]);
+				break;
+			case 'degf-kelvin':
+				fToK(inputArgs[1]);
+				break;
+			case 'kelvin-degf':
+				kToF(inputArgs[1]);
 				break;
 			default:
 				errorMessage();
