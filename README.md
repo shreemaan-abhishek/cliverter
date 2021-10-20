@@ -1,2 +1,2 @@
 # cliverter
-Converter tool at the comfort of your terminals.
+Converter tool at the comfort of your command line.
