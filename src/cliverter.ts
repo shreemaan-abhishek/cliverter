@@ -18,35 +18,53 @@ import {
 } from './converters/length';
 import { cToF, cToK, fToC, fToK, kToC, kToF } from './converters/temperature';
 
+type conversionFunction = (value: string) => void;
+
 class Command {
-	name: string;
 	description: string;
-	constructor(name: string, description: string) {
-		this.name = name;
+	action: conversionFunction;
+	constructor(description: string, action: conversionFunction) {
 		this.description = description;
+		this.action = action;
 	}
 }
 
-const supportedCommands: Command[] = [
-	new Command('inch-cm', 'Convert inch to centimeters'),
-	new Command('cm-inch', 'Convert centimeters to inch'),
-	new Command('mile-meter', 'Convert miles to meters'),
-	new Command('meter-mile', 'Convert meters to miles'),
-	new Command('yard-meter', 'Convert yards to meters'),
-	new Command('meter-yard', 'Convert meters to yards'),
-	new Command('hectare-metersq', 'Convert hectares to meter square'),
-	new Command('metersq-hectare', 'Convert meter square to hectares'),
-	new Command('hectare-acre', 'Convert hectares to acres'),
-	new Command('acre-hectare', 'Convert acres to hectares'),
-	new Command('sqft-metersq', 'Convert square feet to meter square'),
-	new Command('metersq-sqft', 'Convert meter square to square feet'),
-	new Command('degf-degc', 'Convert fahrenheit to celcius'),
-	new Command('degc-degf', 'Convert celcius to fahrenheit'),
-	new Command('degc-kelvin', 'Convert celcius to kelvin'),
-	new Command('kelvin-degc', 'Convert kelvin to celcius'),
-	new Command('degf-kelvin', 'Convert fahrenheit to kelvin'),
-	new Command('kelvin-degf', 'Convert kelvin to fahrenheit'),
-];
+type CommandMap = {
+	[key: string]: Command;
+};
+
+const supportedCommands: CommandMap = {
+	'inch-cm': new Command('Convert inch to centimeters', inchToCm),
+	'cm-inch': new Command('Convert centimeters to inch', cmToInch),
+	'mile-meter': new Command('Convert miles to meters', mileToMeter),
+	'meter-mile': new Command('Convert meters to miles', meterToMile),
+	'yard-meter': new Command('Convert yards to meters', yardToMeter),
+	'meter-yard': new Command('Convert meters to yards', meterToYard),
+	'hectare-metersq': new Command(
+		'Convert hectares to meter square',
+		hectareToMeterSq
+	),
+	'metersq-hectare': new Command(
+		'Convert meter square to hectares',
+		meterSqToHectare
+	),
+	'hectare-acre': new Command('Convert hectares to acres', hectareToAcre),
+	'acre-hectare': new Command('Convert acres to hectares', acreToHectare),
+	'sqft-metersq': new Command(
+		'Convert square feet to meter square',
+		sqFeetToMeterSq
+	),
+	'metersq-sqft': new Command(
+		'Convert meter square to square feet',
+		meterSqToSqFeet
+	),
+	'degf-degc': new Command('Convert fahrenheit to celcius', fToC),
+	'degc-degf': new Command('Convert celcius to fahrenheit', cToF),
+	'degc-kelvin': new Command('Convert celcius to kelvin', cToK),
+	'kelvin-degc': new Command('Convert kelvin to celcius', kToC),
+	'degf-kelvin': new Command('Convert fahrenheit to kelvin', fToK),
+	'kelvin-degf': new Command('Convert kelvin to fahrenheit', kToF),
+};
 
 const helpMessage = () => {
 	const cliverterFiglet = figlet.textSync('Cliverter', {
@@ -57,10 +75,6 @@ const helpMessage = () => {
 	console.log(helpText);
 };
 
-const errorMessage = () => {
-	console.log(`Unrecognized command. See 'cliverter --help'`);
-};
-
 const args: string[] = process.argv; // Command line arguments
 const inputArgs: string[] = args.slice(2); // Remove first two arguments
 
@@ -69,85 +83,14 @@ if (inputArgs.length === 0) {
 } else if (inputArgs.length > 2) {
 	console.log(`Error: Received ${inputArgs.length} arguments but expected 1`);
 } else {
-	// check if user forgot to mention the input for conversion
-	if (
-		inputArgs[1] === undefined &&
-		inputArgs[0] !== '--help' &&
-		isValidCommand(inputArgs[0])
-	) {
-		console.log('Nothing specified, nothing converted.');
+	if (supportedCommands[inputArgs[0]]) {
+		// check if user forgot to mention the input for conversion
+		if (inputArgs[1] === undefined && inputArgs[0] !== '--help') {
+			console.log('Nothing specified, nothing converted.');
+		} else {
+			supportedCommands[inputArgs[0]].action(inputArgs[1]);
+		}
 	} else {
-		switch (inputArgs[0]) {
-			case '--help':
-				helpMessage();
-				break;
-			case 'inch-cm':
-				inchToCm(inputArgs[1]);
-				break;
-			case 'cm-inch':
-				cmToInch(inputArgs[1]);
-				break;
-			case 'mile-meter':
-				mileToMeter(inputArgs[1]);
-				break;
-			case 'meter-mile':
-				meterToMile(inputArgs[1]);
-				break;
-			case 'yard-meter':
-				yardToMeter(inputArgs[1]);
-				break;
-			case 'meter-yard':
-				meterToYard(inputArgs[1]);
-				break;
-			case 'metersq-hectare':
-				meterSqToHectare(inputArgs[1]);
-				break;
-			case 'hectare-metersq':
-				hectareToMeterSq(inputArgs[1]);
-				break;
-			case 'hectare-acre':
-				hectareToAcre(inputArgs[1]);
-				break;
-			case 'acre-hectare':
-				acreToHectare(inputArgs[1]);
-				break;
-			case 'sqft-metersq':
-				sqFeetToMeterSq(inputArgs[1]);
-				break;
-			case 'metersq-sqft':
-				meterSqToSqFeet(inputArgs[1]);
-				break;
-			case 'degf-degc':
-				fToC(inputArgs[1]);
-				break;
-			case 'degc-degf':
-				cToF(inputArgs[1]);
-				break;
-			case 'degc-kelvin':
-				cToK(inputArgs[1]);
-				break;
-			case 'kelvin-degc':
-				kToC(inputArgs[1]);
-				break;
-			case 'degf-kelvin':
-				fToK(inputArgs[1]);
-				break;
-			case 'kelvin-degf':
-				kToF(inputArgs[1]);
-				break;
-			default:
-				errorMessage();
-		}
+		console.log(`Unrecognized command. See 'cliverter --help'`);
 	}
-}
-
-function isValidCommand(command: string) {
-	let isValid = false;
-	supportedCommands.forEach((supportedCommand) => {
-		if (supportedCommand.name === command) {
-			isValid = true;
-			return;
-		}
-	});
-	return isValid;
 }
