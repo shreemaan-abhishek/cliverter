@@ -18,12 +18,15 @@ import {
 } from './converters/length';
 import { cToF, cToK, fToC, fToK, kToC, kToF } from './converters/temperature';
 
+type conversionFunction = (value: string) => void;
+
 class Command {
-	name: string;
 	description: string;
-	constructor(name: string, description: string) {
+	action: conversionFunction;
+	constructor(name: string, description: string, action: conversionFunction) {
 		this.name = name;
 		this.description = description;
+		this.action = action;
 	}
 }
 
