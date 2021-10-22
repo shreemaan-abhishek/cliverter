@@ -91,7 +91,7 @@ if (inputArgs.length === 0) {
 	if (
 		inputArgs[1] === undefined &&
 		inputArgs[0] !== '--help' &&
-		isValidCommand(inputArgs[0])
+		supportedCommands[inputArgs[0]]
 	) {
 		console.log('Nothing specified, nothing converted.');
 	} else {
@@ -157,15 +157,4 @@ if (inputArgs.length === 0) {
 				errorMessage();
 		}
 	}
-}
-
-function isValidCommand(command: string) {
-	let isValid = false;
-	supportedCommands.forEach((supportedCommand) => {
-		if (supportedCommand.name === command) {
-			isValid = true;
-			return;
-		}
-	});
-	return isValid;
 }
