@@ -23,33 +23,48 @@ type conversionFunction = (value: string) => void;
 class Command {
 	description: string;
 	action: conversionFunction;
-	constructor(name: string, description: string, action: conversionFunction) {
-		this.name = name;
+	constructor(description: string, action: conversionFunction) {
 		this.description = description;
 		this.action = action;
 	}
 }
 
-const supportedCommands: Command[] = [
-	new Command('inch-cm', 'Convert inch to centimeters'),
-	new Command('cm-inch', 'Convert centimeters to inch'),
-	new Command('mile-meter', 'Convert miles to meters'),
-	new Command('meter-mile', 'Convert meters to miles'),
-	new Command('yard-meter', 'Convert yards to meters'),
-	new Command('meter-yard', 'Convert meters to yards'),
-	new Command('hectare-metersq', 'Convert hectares to meter square'),
-	new Command('metersq-hectare', 'Convert meter square to hectares'),
-	new Command('hectare-acre', 'Convert hectares to acres'),
-	new Command('acre-hectare', 'Convert acres to hectares'),
-	new Command('sqft-metersq', 'Convert square feet to meter square'),
-	new Command('metersq-sqft', 'Convert meter square to square feet'),
-	new Command('degf-degc', 'Convert fahrenheit to celcius'),
-	new Command('degc-degf', 'Convert celcius to fahrenheit'),
-	new Command('degc-kelvin', 'Convert celcius to kelvin'),
-	new Command('kelvin-degc', 'Convert kelvin to celcius'),
-	new Command('degf-kelvin', 'Convert fahrenheit to kelvin'),
-	new Command('kelvin-degf', 'Convert kelvin to fahrenheit'),
-];
+type CommandMap = {
+	[key: string]: Command;
+};
+
+const supportedCommands: CommandMap = {
+	'inch-cm': new Command('Convert inch to centimeters', inchToCm),
+	'cm-inch': new Command('Convert centimeters to inch', cmToInch),
+	'mile-meter': new Command('Convert miles to meters', mileToMeter),
+	'meter-mile': new Command('Convert meters to miles', meterToMile),
+	'yard-meter': new Command('Convert yards to meters', yardToMeter),
+	'meter-yard': new Command('Convert meters to yards', meterToYard),
+	'hectare-metersq': new Command(
+		'Convert hectares to meter square',
+		hectareToMeterSq
+	),
+	'metersq-hectare': new Command(
+		'Convert meter square to hectares',
+		meterSqToHectare
+	),
+	'hectare-acre': new Command('Convert hectares to acres', hectareToAcre),
+	'acre-hectare': new Command('Convert acres to hectares', acreToHectare),
+	'sqft-metersq': new Command(
+		'Convert square feet to meter square',
+		sqFeetToMeterSq
+	),
+	'metersq-sqft': new Command(
+		'Convert meter square to square feet',
+		meterSqToSqFeet
+	),
+	'degf-degc': new Command('Convert fahrenheit to celcius', fToC),
+	'degc-degf': new Command('Convert celcius to fahrenheit', cToF),
+	'degc-kelvin': new Command('Convert celcius to kelvin', cToK),
+	'kelvin-degc': new Command('Convert kelvin to celcius', kToC),
+	'degf-kelvin': new Command('Convert fahrenheit to kelvin', fToK),
+	'kelvin-degf': new Command('Convert kelvin to fahrenheit', kToF),
+};
 
 const helpMessage = () => {
 	const cliverterFiglet = figlet.textSync('Cliverter', {
