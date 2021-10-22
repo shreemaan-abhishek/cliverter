@@ -75,10 +75,6 @@ const helpMessage = () => {
 	console.log(helpText);
 };
 
-const errorMessage = () => {
-	console.log(`Unrecognized command. See 'cliverter --help'`);
-};
-
 const args: string[] = process.argv; // Command line arguments
 const inputArgs: string[] = args.slice(2); // Remove first two arguments
 
@@ -87,74 +83,14 @@ if (inputArgs.length === 0) {
 } else if (inputArgs.length > 2) {
 	console.log(`Error: Received ${inputArgs.length} arguments but expected 1`);
 } else {
-	// check if user forgot to mention the input for conversion
-	if (
-		inputArgs[1] === undefined &&
-		inputArgs[0] !== '--help' &&
-		supportedCommands[inputArgs[0]]
-	) {
-		console.log('Nothing specified, nothing converted.');
-	} else {
-		switch (inputArgs[0]) {
-			case '--help':
-				helpMessage();
-				break;
-			case 'inch-cm':
-				inchToCm(inputArgs[1]);
-				break;
-			case 'cm-inch':
-				cmToInch(inputArgs[1]);
-				break;
-			case 'mile-meter':
-				mileToMeter(inputArgs[1]);
-				break;
-			case 'meter-mile':
-				meterToMile(inputArgs[1]);
-				break;
-			case 'yard-meter':
-				yardToMeter(inputArgs[1]);
-				break;
-			case 'meter-yard':
-				meterToYard(inputArgs[1]);
-				break;
-			case 'metersq-hectare':
-				meterSqToHectare(inputArgs[1]);
-				break;
-			case 'hectare-metersq':
-				hectareToMeterSq(inputArgs[1]);
-				break;
-			case 'hectare-acre':
-				hectareToAcre(inputArgs[1]);
-				break;
-			case 'acre-hectare':
-				acreToHectare(inputArgs[1]);
-				break;
-			case 'sqft-metersq':
-				sqFeetToMeterSq(inputArgs[1]);
-				break;
-			case 'metersq-sqft':
-				meterSqToSqFeet(inputArgs[1]);
-				break;
-			case 'degf-degc':
-				fToC(inputArgs[1]);
-				break;
-			case 'degc-degf':
-				cToF(inputArgs[1]);
-				break;
-			case 'degc-kelvin':
-				cToK(inputArgs[1]);
-				break;
-			case 'kelvin-degc':
-				kToC(inputArgs[1]);
-				break;
-			case 'degf-kelvin':
-				fToK(inputArgs[1]);
-				break;
-			case 'kelvin-degf':
-				kToF(inputArgs[1]);
-				break;
-			default:
-				errorMessage();
+	if (supportedCommands[inputArgs[0]]) {
+		// check if user forgot to mention the input for conversion
+		if (inputArgs[1] === undefined && inputArgs[0] !== '--help') {
+			console.log('Nothing specified, nothing converted.');
+		} else {
+			supportedCommands[inputArgs[0]].action(inputArgs[1]);
 		}
+	} else {
+		console.log(`Unrecognized command. See 'cliverter --help'`);
 	}
 }
