@@ -64,16 +64,22 @@ const supportedCommands: CommandMap = {
 	'kelvin-degc': new Command('Convert kelvin to celcius', kToC),
 	'degf-kelvin': new Command('Convert fahrenheit to kelvin', fToK),
 	'kelvin-degf': new Command('Convert kelvin to fahrenheit', kToF),
+	'--help': new Command('Shows help message', helpMessage),
 };
 
-const helpMessage = () => {
+function helpMessage() {
 	const cliverterFiglet = figlet.textSync('Cliverter', {
 		font: 'Standard',
 		horizontalLayout: 'full',
 	});
-	const helpText = `${cliverterFiglet}\n\nCliverter is a converter app in a command-line.\nusage: cliverter <command>`;
+	const helpText = `${cliverterFiglet}\n\nCliverter is a converter app in a command-line.\nusage: cliverter <command>\n`;
 	console.log(helpText);
-};
+	for (const key in supportedCommands) {
+		if (Object.prototype.hasOwnProperty.call(supportedCommands, key)) {
+			console.log(key + ' -> ' + supportedCommands[key].description);
+		}
+	}
+}
 
 const args: string[] = process.argv; // Command line arguments
 const inputArgs: string[] = args.slice(2); // Remove first two arguments
