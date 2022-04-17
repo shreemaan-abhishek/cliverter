@@ -4,7 +4,7 @@ Cliverter is a command line tool which can perform basic unit conversion. I buil
 
 # Installation:
 
-Prerequisites: You have npm installed in your system.
+Prerequisite: You have npm installed in your system.
 
 Run the following command:
 
