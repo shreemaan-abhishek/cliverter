@@ -75,9 +75,7 @@ function helpMessage() {
 	const helpText = `${cliverterFiglet}\n\nCliverter is a converter app in a command-line.\nusage: cliverter <command>\n`;
 	console.log(helpText);
 	for (const key in supportedCommands) {
-		if (Object.prototype.hasOwnProperty.call(supportedCommands, key)) {
-			console.log(key + ' -> ' + supportedCommands[key].description);
-		}
+		console.log(key + ' -> ' + supportedCommands[key].description);
 	}
 }
 
