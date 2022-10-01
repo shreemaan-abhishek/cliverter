@@ -95,6 +95,6 @@ if (inputArgs.length === 0) {
 			supportedCommands[inputArgs[0]].action(inputArgs[1]);
 		}
 	} else {
-		console.log(`${inputArgs[0]} ${(inputArgs[1])?inputArgs[1]:""} is not a recognized command. See 'cliverter --help`);
+		console.log(`${inputArgs[0]} ${(inputArgs[1])?inputArgs[1]+" ":""}is not a recognized command. See 'cliverter --help`);
 	}
 }
